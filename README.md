@@ -3,7 +3,7 @@ Secure, reproducable, password generation from lossless image files
 
 Password generation with PixelPass is a 3 step process.
 
-1: Choose the initial master image that will be used to modifying values when generating a password.
+1: Choose the initial master image that will be used to modify values when generating a password.
 
 2: Select the image you would like to use as a key with this master file for password generation.
 
