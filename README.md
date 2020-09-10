@@ -9,9 +9,6 @@ Password generation with PixelPass is a 3 step process.
 
 3: Enter your desired password length.
 
-# Notes
+
 The tool will let you know how long your password can be according to the deminsions of your chosen image.
 More updates will come. The next step in the development process is creating a GUI for simpler file selection.
-
-# Dependencies
-This tool requires Pillow and Numpy installations to function.
