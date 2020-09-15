@@ -1,14 +1,17 @@
 # PixelPass
+
 Secure, reproducable, password generation from lossless image files
 
 Password generation with PixelPass is a 3 step process.
 
-1: Choose the initial master image that will be used to modify values when generating a password.
-
-2: Select the image you would like to use as a key with this master file for password generation.
-
-3: Enter your desired password length.
-
+# 1: Select image source for password generation.
+# 2. Enter your desired password length.
+# 3: Choose whether to include special characters.
 
 The tool will let you know how long your password can be according to the deminsions of your chosen image.
-More updates will come. The next step in the development process is creating a GUI for simpler file selection.
+It automatically updates as you change files, input password length, and toggle special characters.
+More updates will come. The next step in the development process is revamping the UI.
+
+# Note:
+PixelPass currently only supports png and bmp files. I plan to add more in the future but hope the most common
+are good enough for now!
