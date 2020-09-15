@@ -1,37 +1,58 @@
-from PIL import Image
+from PIL import Image as Img
+import platform
 import numpy as np
+from tkinter import filedialog
+import GenPass
 
 
-def verifyType(image):
-    """Verifies the image selected matches accepted file types"""
-    acceptedTypes = ["bmp", "raw", "png"]
-    fileExt = image[-3:]
-    if fileExt not in acceptedTypes:
-        print("\nImage must be RAW, PNG, or BMP type")
-        return False
+# Initialize variables to hold password image path and data
+passImgPath = None
+passImgData = None
+passImgContext = None
+passCenterRow = None
+passMaxLength = None
+
+
+def getContext():
+    """Opens file dialog for master and password key image selection, opens the image,
+    and then returns the RGB data in a new numpy array"""
+
+    global passImgPath
+    global passImgData
+    global passImgContext
+    global passCenterRow
+    global passMaxLength
+
+    # Determines system platform to decide image selection's starting directory
+    plt = platform.system()
+    if plt == "Windows":
+        strdir = "C:/Users"
+    elif plt == "Linux":
+        strdir = "~/"
+    elif plt == "Darwin":
+        strdir = "~/"
     else:
-        return True
+        strdir = "/"
+
+    imagePath = filedialog.askopenfilename(initialdir=strdir, title="Select image", filetypes=(
+        ("png files", "*.png *.PNG"), ("bmp files", "*.bmp *.BMP"), ("all files", "*")))
+
+    passImgPath = imagePath
+    passImgData = getImageData(passImgPath)
+
+    if verifyComplexity(passImgData):
+        passCenterRow = len(passImgData) // 2
+        passCenterRow = passImgData[passCenterRow]
+        passMaxLength = len(passCenterRow)
+        return passImgPath
+    else:
+        passImgPath = "Image did not meet complexity requirements"
+        return passImgPath
 
 
-def getSource():
-    """Requests full path to an image from the user"""
-    while True:
-        sourceImage = input("Image file path: ")
-        if verifyType(sourceImage):
-            try:
-                imageFile = Image.open(sourceImage)
-            except FileNotFoundError:
-                print("File not found\n")
-            else:
-                imageData = np.array(imageFile)
-                return imageData
-
-
-def getContext(data):
-    """Retrieves the center row of pixel data to be used for password generation"""
-    centerRow = len(data) // 2
-    centerRow = data[centerRow]
-    return centerRow
+def getImageData(imagePath):
+    image = Img.open(imagePath)
+    return np.array(image)
 
 
 def verifyComplexity(data):
@@ -47,21 +68,8 @@ def verifyComplexity(data):
             if same:
                 weakCount += 1
         if weakCount > 48:
-            print("Image must be more visually complex for password generation\n")
             return False
         else:
             return True
     else:
-        print("Image must be more visually complex for password generation\n")
         return False
-
-
-def diffPass():
-    """Asks the user whether they would like to input another
-    image for password generation"""
-    while True:
-        again = input("Generate another password? [Y / N]: ")
-        if again.upper() not in ['Y', 'N']:
-            print("Please enter Y or N to continue\n")
-        else:
-            return again.upper()
