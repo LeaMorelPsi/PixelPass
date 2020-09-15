@@ -38,7 +38,11 @@ def getContext():
         ("png files", "*.png *.PNG"), ("bmp files", "*.bmp *.BMP"), ("all files", "*")))
 
     passImgPath = imagePath
-    passImgData = getImageData(passImgPath)
+
+    try:
+        passImgData = getImageData(passImgPath)
+    except AttributeError:
+        return False
 
     if verifyComplexity(passImgData):
         passCenterRow = len(passImgData) // 2
