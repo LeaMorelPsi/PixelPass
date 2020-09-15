@@ -7,7 +7,7 @@ import GenPass
 class PixelPass():
     def __init__(self):
 
-        #! Main window --Packed
+        #! Main window
 
         self.root = tk.Tk()
         self.root.geometry('800x500')
@@ -17,7 +17,7 @@ class PixelPass():
 
         ################################################
 
-        #! Password image label --Packed
+        #! Password image label
 
         self.passImgPath = tk.StringVar()
         self.passImgLabel = tk.ttk.Label(
@@ -26,21 +26,21 @@ class PixelPass():
 
         ##########################################################################
 
-        #! Password image button --Packed
+        #! Password image button
 
         self.passImgBtn = tk.ttk.Button(self.root, text="Password image", command=(
             lambda: [Collection.getContext(), self.changePassPath(), self.changeMax(), self.changePass(GenPass.desiredLength, self.onOrOff.get())]))
 
         #############################################################################################################
 
-        #! Desired length label --Packed
+        #! Desired length label
 
         self.desiredLengthLabel = tk.ttk.Label(
             self.root, text="Enter password length:", font=("Arial", 20), foreground="white", background="black")
 
         ################################################################################
 
-        #! Maximum password length label --Packed
+        #! Maximum password length label
 
         self.maxLengthText = tk.StringVar()
         self.maxLengthLabel = tk.ttk.Label(
@@ -48,7 +48,7 @@ class PixelPass():
 
         ##############################################################################
 
-        #! Desired password length entry --Packed
+        #! Desired password length entry
 
         self.desLengthEntry = tk.ttk.Entry(
             self.root, width=6, font=("Arial", 16), justify="center")
@@ -56,14 +56,14 @@ class PixelPass():
 
         #######################################################################
 
-        #! Outputted password label --Packed
+        #! Outputted password label
 
         self.passLabel = tk.ttk.Label(self.root, font=(
             "Arial", 24), justify="center", text="Password:", foreground="white", background="black")
 
         ##############################################################################################
 
-        #! Outputted password entry --Packed
+        #! Outputted password entry
 
         self.passText = tk.Text(self.root, height=1)
         self.passText.configure(
